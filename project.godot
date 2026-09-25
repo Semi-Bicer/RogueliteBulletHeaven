@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Bullet Heaven"
 config/description="2D Top-Down Survivor-like / Reverse Bullet Hell"
-run/main_scene="res://scenes/main/Main.tscn"
+run/main_scene="uid://cviif43na0brq"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
