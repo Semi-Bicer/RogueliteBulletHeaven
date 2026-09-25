@@ -1,0 +1,56 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+/build/
+/export/
+*.translation
+
+# Exported binaries
+*.exe
+*.pck
+*.zip
+*.apk
+*.aab
+*.x86_64
+*.dmg
+
+# Mono / C#
+.mono/
+data_*/
+mono_crash.*.json
+.vs/
+.vscode/
+*.csproj.user
+
+# OS junk
+Thumbs.db
+.DS_Store
+
+# AI coding assistants — personal tooling, not project config.
+# Nobody on the team should have to adopt someone else's assistant.
+.claude/
+CLAUDE.md
+.cursor/
+.cursorrules
+.cursorignore
+.windsurf/
+.windsurfrules
+.github/copilot-instructions.md
+.aider*
+.continue/
+.codeium/
+.cline/
+.roo/
+.kilocode/
+.junie/
+.trae/
+.gemini/
+.amazonq/
+.qodo/
+.specstory/
+AGENTS.md
+GEMINI.md
+
+# MCP server configs: these can hold API tokens. Never commit them.
+.mcp.json
+mcp.json
