@@ -159,9 +159,12 @@ Spawned objects (projectiles, novas) are parented to the node in the
 `projectile_parent` group — the spawner — so they live in world space rather than
 inheriting the player transform.
 
-### The three reference weapons **[TO BUILD]**
+### Weapons
 
-**Magic Missile** — projectile weapon, the starting weapon.
+Magic Missile, Fire Ball and Shock Nova are **[IN REPO]**. Orbital Shield is
+**[ON HOLD]** — do not build it until this note is lifted.
+
+**Magic Missile** **[IN REPO]** — projectile weapon, the starting weapon.
 
 | Stat | Value |
 | --- | --- |
@@ -178,7 +181,20 @@ plus/minus 0.35 rad spread. With no enemies alive it fires along `player.facing`
 260 px at strength 3.0/s), 2.4 s lifetime, tracks already-hit bodies so pierce
 cannot double-dip the same enemy.
 
-**Orbital Shield** — no cooldown, permanent orbiting damage.
+**Fire Ball** **[IN REPO]** — piercing projectile.
+
+| Stat | Value |
+| --- | --- |
+| damage | `18 + (level-1) * 5` |
+| enemies hit | `2 + (level-1)` (pierce = hits - 1) |
+| cooldown | `max(0.9, 1.6 - (level-1) * 0.08)` |
+| speed | 360 |
+
+Fires one ball at the nearest enemy (or along `player.facing`), plus
+`stats.extra_projectiles` fanned out at 0.25 rad. **No homing**, so it can punch
+through a line of enemies. Reuses `Projectile.gd` with `homing = false`.
+
+**Orbital Shield** **[ON HOLD]** — no cooldown, permanent orbiting damage.
 
 | Stat | Value |
 | --- | --- |
@@ -192,7 +208,7 @@ Sets `base_cooldown = 999` and overrides `_process` to spin instead of firing.
 0.5 s in a dictionary keyed by instance id, so a parked enemy is damaged at a
 fixed rate rather than every frame.
 
-**Shock Nova** — periodic AoE centred on the player.
+**Shock Nova** **[IN REPO]** — periodic AoE centred on the player.
 
 | Stat | Value |
 | --- | --- |
@@ -289,7 +305,8 @@ choices when everything is maxed.
 | id | Name | Effect | Max |
 | --- | --- | --- | --- |
 | `magic_missile` | Magic Missile | weapon | 8 |
-| `orbital_shield` | Orbital Shield | weapon | 8 |
+| `fire_ball` | Fire Ball | weapon | 8 |
+| `orbital_shield` | Orbital Shield **[ON HOLD]** | weapon | 8 |
 | `shock_nova` | Shock Nova | weapon | 8 |
 | `might` | Might | `damage_mult` +0.12 | 6 |
 | `haste` | Haste | `fire_rate_mult` +0.10 | 6 |

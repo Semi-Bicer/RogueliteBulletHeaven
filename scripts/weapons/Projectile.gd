@@ -1,11 +1,13 @@
 class_name Projectile
 extends Area2D
-## Player bolt. Flies straight, gently homes on the nearest enemy in range,
+## Player bolt. Flies straight, optionally homes on the nearest enemy in range,
 ## and damages each enemy at most once so pierce cannot double-dip.
 
 const LIFETIME := 2.4
 const HOMING_RANGE := 260.0
 const HOMING_STRENGTH := 3.0  ## Slerp weight per second.
+
+@export var homing: bool = true
 
 var velocity: Vector2 = Vector2.ZERO
 var damage: float = 10.0
@@ -31,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	if _life <= 0.0:
 		queue_free()
 		return
-	var target := _nearest_target()
+	var target := _nearest_target() if homing else null
 	if target != null:
 		var speed := velocity.length()
 		var want := global_position.direction_to(target.global_position) * speed
