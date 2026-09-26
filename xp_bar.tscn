@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bpvsh8joqrnrx"]
+
+[ext_resource type="Script" uid="uid://bsop06fi241xq" path="res://HUD.gd" id="1_ocuqq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6yq1j"]
+bg_color = Color(0, 0, 0, 0.53333336)
+
+[node name="HUD" type="CanvasLayer" unique_id=1971079792]
+script = ExtResource("1_ocuqq")
+
+[node name="Control" type="Control" parent="." unique_id=1803598358]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TopMargin" type="MarginContainer" parent="Control" unique_id=720646877]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 27.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="XPBar" type="ProgressBar" parent="Control/TopMargin" unique_id=165742459]
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6yq1j")
+show_percentage = false
+
+[node name="StatsMargin" type="MarginContainer" parent="Control" unique_id=957675562]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/StatsMargin" unique_id=1655064846]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="Control/StatsMargin/HBoxContainer" unique_id=1614058085]
+layout_mode = 2
+text = "LVL 1"
+
+[node name="Spacer" type="Control" parent="Control/StatsMargin/HBoxContainer" unique_id=2000065020]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="Control/StatsMargin/HBoxContainer" unique_id=179290770]
+layout_mode = 2
+text = "00:00"
+
+[node name="Spacer2" type="Control" parent="Control/StatsMargin/HBoxContainer" unique_id=1712224856]
+layout_mode = 2
+
+[node name="KillsLabel" type="Label" parent="Control/StatsMargin/HBoxContainer" unique_id=1079795184]
+layout_mode = 2
+text = "0 Kills"

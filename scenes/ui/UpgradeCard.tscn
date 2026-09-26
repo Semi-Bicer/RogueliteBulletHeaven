@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://chjk07ggxw871"]
+
+[ext_resource type="Script" uid="uid://cwb853ejhw0ns" path="res://UpgradeCard.gd" id="1_yeejx"]
+
+[node name="UpgradeCard" type="PanelContainer" unique_id=1846627239]
+custom_minimum_size = Vector2(200, 240)
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_yeejx")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1040904943]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=851340072]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Icon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=1841751850]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+stretch_mode = 3
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1424679403]
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DescLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=23004869]
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="SelectButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=367373721]
+layout_mode = 2
+text = "SEÇ"

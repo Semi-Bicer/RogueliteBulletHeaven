@@ -3,27 +3,30 @@
 [ext_resource type="Script" uid="uid://c5cy8nna412wf" path="res://scripts/main/Main.gd" id="1_main"]
 [ext_resource type="Script" uid="uid://4x5sn63e3wvn" path="res://scripts/main/Background.gd" id="2_bg"]
 [ext_resource type="Script" uid="uid://bsct2a3i6egrq" path="res://scripts/systems/EnemySpawner.gd" id="3_spawner"]
-[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="4_player"]
+[ext_resource type="PackedScene" uid="uid://dyovpdreyxo0u" path="res://scenes/player/Player.tscn" id="4_player"]
 [ext_resource type="PackedScene" uid="uid://sa7t5basj4t4" path="res://PauseMenu.tscn" id="5_dc040"]
 [ext_resource type="PackedScene" uid="uid://bymijpxo45a7u" path="res://scenes/ui/GameOverMenu.tscn" id="6_1rhdn"]
-[ext_resource type="PackedScene" path="res://scenes/ui/LevelUpPicker.tscn" id="7_picker"]
+[ext_resource type="PackedScene" uid="uid://bpvsh8joqrnrx" path="res://xp_bar.tscn" id="7_sjxhf"]
+[ext_resource type="PackedScene" uid="uid://bhj7kyf3m13de" path="res://scenes/ui/UpgradeMenu.tscn" id="8_ko0rf"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=605574312]
 script = ExtResource("1_main")
 
-[node name="Background" type="Node2D" parent="."]
+[node name="Background" type="Node2D" parent="." unique_id=158764529]
 z_index = -100
 script = ExtResource("2_bg")
 
-[node name="EnemySpawner" type="Node2D" parent="."]
+[node name="EnemySpawner" type="Node2D" parent="." unique_id=759415293]
 script = ExtResource("3_spawner")
 
-[node name="Entities" type="Node2D" parent="."]
+[node name="Entities" type="Node2D" parent="." unique_id=1315728283]
 
-[node name="Player" parent="Entities" instance=ExtResource("4_player")]
+[node name="Player" parent="Entities" unique_id=727052615 instance=ExtResource("4_player")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("5_dc040")]
+[node name="PauseMenu" parent="." unique_id=1394130646 instance=ExtResource("5_dc040")]
 
-[node name="GameOverMenu" parent="." instance=ExtResource("6_1rhdn")]
+[node name="GameOverMenu" parent="." unique_id=1625309386 instance=ExtResource("6_1rhdn")]
 
-[node name="LevelUpPicker" parent="." instance=ExtResource("7_picker")]
+[node name="HUD" parent="." unique_id=1971079792 instance=ExtResource("7_sjxhf")]
+
+[node name="UpgradeMenu" parent="." unique_id=135089525 instance=ExtResource("8_ko0rf")]
