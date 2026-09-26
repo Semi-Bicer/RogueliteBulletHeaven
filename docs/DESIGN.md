@@ -9,8 +9,6 @@ implement them. Sections marked **[TO BUILD]** are not in the codebase right now
 they are the spec for that work. Sections marked **[IN REPO]** exist today and are
 the foundation the rest plugs into.
 
-Verified before strip-down, headless: a full 15:00 run reached level 47 with
-3578 kills and zero engine errors.
 
 ---
 

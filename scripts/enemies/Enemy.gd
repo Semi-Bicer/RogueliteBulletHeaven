@@ -1,11 +1,13 @@
 class_name Enemy
 extends CharacterBody2D
 ## Swarm unit. Walks straight at the player and damages on contact.
-## All variants share this script; stats come from EnemySpawner.TYPES.
+## All variants share this script; stats and sprite come from EnemySpawner.TYPES.
+## Sprites are drawn facing right and flipped toward the direction of travel.
 
 const KNOCKBACK_DECAY := 9.0
+const HIT_FLASH := Color(2.5, 2.5, 2.5)  ## Overbright modulate washes the sprite white.
 
-@onready var body_visual: Polygon2D = $Body
+@onready var body_visual: Sprite2D = $Body
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 var max_health: float = 10.0
@@ -14,7 +16,6 @@ var speed: float = 55.0
 var contact_damage: float = 6.0
 var xp_value: int = 1
 var is_boss: bool = false
-var base_color: Color = Color(0.85, 0.35, 0.42)
 
 var _player: Node2D = null
 var _knockback: Vector2 = Vector2.ZERO
@@ -34,14 +35,12 @@ func configure(data: Dictionary, mult: float) -> void:
 	contact_damage = float(data["damage"]) * (1.0 + (mult - 1.0) * 0.5)
 	xp_value = int(data["xp"])
 	is_boss = bool(data.get("boss", false))
-	base_color = data["color"]
 
 	var radius := float(data["size"])
 	var circle := CircleShape2D.new()
 	circle.radius = radius
 	collision.shape = circle
-	body_visual.scale = Vector2.ONE * (radius / 14.0)
-	body_visual.color = base_color
+	body_visual.texture = data["sprite"]
 
 
 func _physics_process(delta: float) -> void:
@@ -56,6 +55,8 @@ func _physics_process(delta: float) -> void:
 	_knockback = _knockback.move_toward(Vector2.ZERO, KNOCKBACK_DECAY * 60.0 * delta)
 	velocity = desired + _knockback
 	move_and_slide()
+	if not is_zero_approx(desired.x):
+		body_visual.flip_h = desired.x < 0.0
 
 
 func get_contact_damage() -> float:
@@ -75,9 +76,9 @@ func take_damage(amount: float) -> void:
 
 
 func _flash() -> void:
-	body_visual.color = Color(1, 1, 1)
+	body_visual.modulate = HIT_FLASH
 	var tween := create_tween()
-	tween.tween_property(body_visual, "color", base_color, 0.12)
+	tween.tween_property(body_visual, "modulate", Color.WHITE, 0.12)
 
 
 func _die() -> void:

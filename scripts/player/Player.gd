@@ -6,6 +6,7 @@ extends CharacterBody2D
 const ARENA := Rect2(-3000, -3000, 6000, 6000)
 const CONTACT_TICK := 0.45  ## Seconds between contact-damage ticks.
 const IFRAME_FLASH := 0.12
+const STARTING_WEAPON := "magic_missile"
 
 @onready var weapon_root: Node2D = $Weapons
 @onready var hurt_box: Area2D = $HurtBox
@@ -29,6 +30,7 @@ func _ready() -> void:
 	health = stats.max_health()
 	_refresh_pickup_radius()
 	pickup_area.area_entered.connect(_on_pickup_area_entered)
+	apply_upgrade(STARTING_WEAPON)
 	EventBus.player_health_changed.emit(health, stats.max_health())
 
 
@@ -128,7 +130,6 @@ func _flash(color: Color) -> void:
 # --- Upgrades -----------------------------------------------------------
 
 ## Single entry point from an upgrade id to a weapon or a stat change.
-## Does nothing until UpgradeDB.UPGRADES has entries.
 func apply_upgrade(id: String) -> void:
 	var data := UpgradeDB.get_upgrade(id)
 	if data.is_empty():
