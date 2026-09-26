@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://sa7t5basj4t4" path="res://PauseMenu.tscn" id="5_dc040"]
 [ext_resource type="PackedScene" uid="uid://bymijpxo45a7u" path="res://scenes/ui/GameOverMenu.tscn" id="6_1rhdn"]
 [ext_resource type="PackedScene" uid="uid://bpvsh8joqrnrx" path="res://xp_bar.tscn" id="7_sjxhf"]
+[ext_resource type="PackedScene" uid="uid://bhj7kyf3m13de" path="res://scenes/ui/UpgradeMenu.tscn" id="8_ko0rf"]
 
 [node name="Main" type="Node2D" unique_id=605574312]
 script = ExtResource("1_main")
@@ -27,3 +28,5 @@ script = ExtResource("3_spawner")
 [node name="GameOverMenu" parent="." unique_id=1625309386 instance=ExtResource("6_1rhdn")]
 
 [node name="HUD" parent="." unique_id=1971079792 instance=ExtResource("7_sjxhf")]
+
+[node name="UpgradeMenu" parent="." unique_id=135089525 instance=ExtResource("8_ko0rf")]
