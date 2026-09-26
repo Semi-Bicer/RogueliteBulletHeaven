@@ -1,16 +1,20 @@
 extends Node
 ## Upgrade catalogue and the roll that builds a legal set of level-up choices.
 ##
-## The catalogue is intentionally empty. Filling it is the content task:
-## docs/DESIGN.md section 7 lists the thirteen upgrades this shipped with, the
-## two entry shapes, and the rules `roll()` has to respect.
+## Only the starting weapon is registered so far. docs/DESIGN.md section 7
+## lists the rest of the catalogue, the two entry shapes, and the rules
+## `roll()` has to respect.
 
 const MAX_WEAPONS := 3
 
 ## Entry shapes:
 ##   weapon  -> { id, name, desc, kind = "weapon",  scene, max_level, color }
 ##   passive -> { id, name, desc, kind = "passive", stat, amount, max_level, color }
-const UPGRADES: Array[Dictionary] = []
+const UPGRADES: Array[Dictionary] = [
+	{"id": "magic_missile", "name": "Magic Missile", "desc": "Fires homing bolts at the nearest enemy.",
+		"kind": "weapon", "scene": "res://scenes/weapons/MagicMissile.tscn", "max_level": 8,
+		"color": Color(0.55, 0.85, 1.0)},
+]
 
 
 func get_upgrade(id: String) -> Dictionary:

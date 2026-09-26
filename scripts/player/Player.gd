@@ -6,12 +6,13 @@ extends CharacterBody2D
 const ARENA := Rect2(-3000, -3000, 6000, 6000)
 const CONTACT_TICK := 0.45  ## Seconds between contact-damage ticks.
 const IFRAME_FLASH := 0.12
+const STARTING_WEAPON := "magic_missile"
 
 @onready var weapon_root: Node2D = $Weapons
 @onready var hurt_box: Area2D = $HurtBox
 @onready var pickup_area: Area2D = $PickupArea
 @onready var pickup_shape: CollisionShape2D = $PickupArea/CollisionShape2D
-@onready var body_visual: Polygon2D = $Body
+@onready var body_visual: AnimatedSprite2D = $Body
 @onready var camera: Camera2D = $Camera2D
 
 var stats := PlayerStats.new()
@@ -29,6 +30,7 @@ func _ready() -> void:
 	health = stats.max_health()
 	_refresh_pickup_radius()
 	pickup_area.area_entered.connect(_on_pickup_area_entered)
+	apply_upgrade(STARTING_WEAPON)
 	EventBus.player_health_changed.emit(health, stats.max_health())
 
 
@@ -42,12 +44,23 @@ func _physics_process(delta: float) -> void:
 	velocity = input_dir.normalized() * stats.move_speed()
 	move_and_slide()
 	global_position = global_position.clamp(ARENA.position, ARENA.end)
+	_update_animation(input_dir)
 
 	if stats.health_regen > 0.0 and health < stats.max_health():
 		heal(stats.health_regen * delta, false)
 
 	_tick_contact_damage(delta)
 	_tick_shake(delta)
+
+
+## Sprite sheet faces right; flip for leftward movement, keep last facing when idle.
+func _update_animation(input_dir: Vector2) -> void:
+	if input_dir == Vector2.ZERO:
+		body_visual.play(&"idle")
+		return
+	body_visual.play(&"run")
+	if not is_zero_approx(input_dir.x):
+		body_visual.flip_h = input_dir.x < 0.0
 
 
 func _tick_contact_damage(delta: float) -> void:
@@ -102,22 +115,21 @@ func heal(amount: float, flash: bool = true) -> void:
 func _die() -> void:
 	alive = false
 	velocity = Vector2.ZERO
-	body_visual.color = Color(0.45, 0.45, 0.5)
+	body_visual.stop()
+	body_visual.modulate = Color(0.45, 0.45, 0.5)
 	EventBus.player_died.emit()
 	GameState.end_run(false)
 
 
 func _flash(color: Color) -> void:
-	var original := Color(0.30, 0.79, 0.94)
-	body_visual.color = color
+	body_visual.modulate = color
 	var tween := create_tween()
-	tween.tween_property(body_visual, "color", original, IFRAME_FLASH)
+	tween.tween_property(body_visual, "modulate", Color.WHITE, IFRAME_FLASH)
 
 
 # --- Upgrades -----------------------------------------------------------
 
 ## Single entry point from an upgrade id to a weapon or a stat change.
-## Does nothing until UpgradeDB.UPGRADES has entries.
 func apply_upgrade(id: String) -> void:
 	var data := UpgradeDB.get_upgrade(id)
 	if data.is_empty():

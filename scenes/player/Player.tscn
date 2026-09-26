@@ -1,6 +1,52 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://cavtsndi7dah1"]
 
-[ext_resource type="Script" path="res://scripts/player/Player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://cy2jiqi0b5sux" path="res://scripts/player/Player.gd" id="1_player"]
+[ext_resource type="PackedScene" uid="uid://ddjxrtqria8c6" path="res://scenes/ui/HealthBar.tscn" id="2_gfjak"]
+[ext_resource type="Texture2D" uid="uid://dlhpl8k1qxla3" path="res://assets/sprites/player/chicken_sheet.png" id="3_sheet"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0"]
+atlas = ExtResource("3_sheet")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1"]
+atlas = ExtResource("3_sheet")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2"]
+atlas = ExtResource("3_sheet")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3"]
+atlas = ExtResource("3_sheet")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_chicken"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_body"]
 radius = 12.0
@@ -12,38 +58,51 @@ radius = 15.0
 resource_local_to_scene = true
 radius = 72.0
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfjak"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="Player" type="CharacterBody2D" unique_id=121460192]
 z_index = 10
-collision_layer = 1
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_player")
 
-[node name="Body" type="Polygon2D" parent="."]
-color = Color(0.3, 0.79, 0.94, 1)
-polygon = PackedVector2Array(0, -14, 11, 0, 0, 14, -11, 0)
+[node name="Body" type="AnimatedSprite2D" parent="." unique_id=264443202]
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_chicken")
+animation = &"idle"
+autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1240238835]
 shape = SubResource("CircleShape2D_body")
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="." unique_id=956878121]
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=1407554152]
 shape = SubResource("CircleShape2D_hurt")
 
-[node name="PickupArea" type="Area2D" parent="."]
+[node name="PickupArea" type="Area2D" parent="." unique_id=1903761303]
 collision_layer = 0
 collision_mask = 8
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea" unique_id=1757618970]
+z_index = 10
 shape = SubResource("CircleShape2D_pickup")
 
-[node name="Weapons" type="Node2D" parent="."]
+[node name="Weapons" type="Node2D" parent="." unique_id=1196440829]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1703922046]
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
+
+[node name="HealthBar" parent="." unique_id=1356644832 instance=ExtResource("2_gfjak")]
+offset_left = -14.0
+offset_top = -24.0
+offset_right = 14.0
+offset_bottom = -19.0
+theme_override_styles/background = SubResource("StyleBoxFlat_gfjak")

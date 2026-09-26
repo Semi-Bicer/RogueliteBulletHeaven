@@ -15,13 +15,13 @@ const MAX_ALIVE := 320
 
 const TYPES := {
 	"slime": {"health": 11.0, "speed": 52.0, "damage": 7.0, "xp": 1, "size": 13.0,
-		"color": Color(0.84, 0.36, 0.44)},
+		"sprite": preload("res://assets/sprites/enemies/slime.png")},
 	"bat": {"health": 7.0, "speed": 96.0, "damage": 5.0, "xp": 1, "size": 10.0,
-		"color": Color(0.58, 0.44, 0.86)},
+		"sprite": preload("res://assets/sprites/enemies/bat.png")},
 	"brute": {"health": 46.0, "speed": 40.0, "damage": 14.0, "xp": 4, "size": 20.0,
-		"color": Color(0.90, 0.56, 0.26)},
+		"sprite": preload("res://assets/sprites/enemies/brute.png")},
 	"husk": {"health": 120.0, "speed": 34.0, "damage": 20.0, "xp": 9, "size": 27.0,
-		"color": Color(0.45, 0.72, 0.52)},
+		"sprite": preload("res://assets/sprites/enemies/husk.png")},
 }
 
 ## Each phase: from `time` seconds on, spawn `batch` enemies every `every`

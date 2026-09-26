@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bymijpxo45a7u"]
+
+[ext_resource type="Script" uid="uid://b58rbplonxfll" path="res://scenes/ui/GameOverMenu.gd" id="1_7nx0y"]
+
+[node name="GameOverMenu" type="CanvasLayer" unique_id=1625309386]
+process_mode = 3
+layer = 10
+script = ExtResource("1_7nx0y")
+
+[node name="Control" type="Control" parent="." unique_id=207418887]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="Control" unique_id=2071491561]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.38431373, 0, 0.019607844, 0.7058824)
+
+[node name="CenterContainer" type="CenterContainer" parent="Control" unique_id=1531347493]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer" unique_id=1503484164]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=884863162]
+layout_mode = 2
+text = "OYUN BİTTİ"
+
+[node name="ScoreLabel" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=1325566041]
+layout_mode = 2
+text = "Öldürülen: 0"
+
+[node name="TimeLabel" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=1604223069]
+layout_mode = 2
+text = "Hayatta Kalma: 00:00"
+
+[node name="RestartButton" type="Button" parent="Control/CenterContainer/VBoxContainer" unique_id=1766231853]
+layout_mode = 2
+text = "YENİDEN BAŞLAT"
+
+[node name="MainMenuButton" type="Button" parent="Control/CenterContainer/VBoxContainer" unique_id=930508596]
+layout_mode = 2
+text = "ANA MENÜ"
