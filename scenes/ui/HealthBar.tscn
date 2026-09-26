@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ddjxrtqria8c6"]
+
+[ext_resource type="Script" uid="uid://car358mbmqjmo" path="res://scenes/ui/HealthBart.gd" id="1_5fhnc"]
+
+[node name="HealthBar" type="ProgressBar" unique_id=1356644832]
+custom_maximum_size = Vector2(32, 5)
+offset_right = 4.0
+offset_bottom = 27.0
+show_percentage = false
+script = ExtResource("1_5fhnc")

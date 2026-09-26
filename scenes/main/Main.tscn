@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://c5cy8nna412wf" path="res://scripts/main/Main.gd" id="1_main"]
 [ext_resource type="Script" uid="uid://4x5sn63e3wvn" path="res://scripts/main/Background.gd" id="2_bg"]
 [ext_resource type="Script" uid="uid://bsct2a3i6egrq" path="res://scripts/systems/EnemySpawner.gd" id="3_spawner"]
-[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="4_player"]
+[ext_resource type="PackedScene" uid="uid://dyovpdreyxo0u" path="res://scenes/player/Player.tscn" id="4_player"]
 [ext_resource type="PackedScene" uid="uid://sa7t5basj4t4" path="res://PauseMenu.tscn" id="5_dc040"]
 [ext_resource type="PackedScene" uid="uid://bymijpxo45a7u" path="res://scenes/ui/GameOverMenu.tscn" id="6_1rhdn"]
+[ext_resource type="PackedScene" uid="uid://bpvsh8joqrnrx" path="res://xp_bar.tscn" id="7_sjxhf"]
 
 [node name="Main" type="Node2D" unique_id=605574312]
 script = ExtResource("1_main")
@@ -24,3 +25,5 @@ script = ExtResource("3_spawner")
 [node name="PauseMenu" parent="." unique_id=1394130646 instance=ExtResource("5_dc040")]
 
 [node name="GameOverMenu" parent="." unique_id=1625309386 instance=ExtResource("6_1rhdn")]
+
+[node name="HUD" parent="." unique_id=1971079792 instance=ExtResource("7_sjxhf")]
