@@ -403,7 +403,7 @@ mirror-symmetric about the stem's centre line.
   are **intentionally empty for now**. Rooms may be added there later; until
   then they are solid, unwalkable space.
 
-**Implementation** — `scenes/levels/Floor1.tscn`, painted in the editor:
+**Implementation** — `scenes/levels/level.tscn`, painted in the editor:
 
 | Node | Content |
 | --- | --- |
