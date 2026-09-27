@@ -7,6 +7,10 @@ const START_RADIUS := 8.0
 const GROW_TIME := 0.32
 const FADE_TIME := 0.18
 const COLOR := Color(0.7, 0.6, 1.0)
+## Easter egg: the GDG On Campus Pamukkale rooster rides inside every blast.
+const LOGO := preload("res://assets/sprites/weapons/gdg_rooster.png")
+const LOGO_FILL := 1.3  ## Logo side as a multiple of the radius (1.41 would touch the ring).
+const LOGO_ALPHA := 0.6
 
 var damage: float = 14.0
 var max_radius: float = 120.0
@@ -56,4 +60,6 @@ func _physics_process(_delta: float) -> void:
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, radius, Color(COLOR, 0.12))
+	var side := radius * LOGO_FILL
+	draw_texture_rect(LOGO, Rect2(Vector2(-side, -side) * 0.5, Vector2(side, side)), false, Color(1, 1, 1, LOGO_ALPHA))
 	draw_arc(Vector2.ZERO, radius, 0.0, TAU, 48, Color(COLOR, 0.85), 3.0)
