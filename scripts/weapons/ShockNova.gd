@@ -2,6 +2,7 @@ extends WeaponBase
 ## Periodic shockwave centred on the player. Stats follow docs/DESIGN.md §5.
 
 const WAVE := preload("res://scripts/weapons/NovaWave.gd")
+const SFX := [preload("res://assets/audio/sfx/shock_nova_impact.wav")]
 
 var damage: float = 14.0
 var radius: float = 120.0
@@ -22,3 +23,4 @@ func _fire() -> void:
 	parent.add_child(wave)
 	wave.global_position = player.global_position
 	player.add_shake(2.5)
+	play_sfx(SFX, -6.0, 2, 0.05)
