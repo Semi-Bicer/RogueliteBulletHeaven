@@ -1,13 +1,19 @@
-[gd_scene format=4]
+[gd_scene format=4 uid="uid://1dxlwnrlo407"]
 
-[ext_resource type="Script" path="res://scripts/levels/Floor1.gd" id="1_x8l0s"]
+[ext_resource type="Script" uid="uid://c51v2ttcia3tu" path="res://scripts/levels/Floor1.gd" id="1_x8l0s"]
 [ext_resource type="TileSet" path="res://assets/tiles/floor1_tileset.tres" id="2_wnqtk"]
 [ext_resource type="TileSet" path="res://assets/tiles/stairs_tileset.tres" id="3_e0rpv"]
-[ext_resource type="Texture2D" path="res://assets/tiles/door_wood.png" id="4_mbgd1"]
-[ext_resource type="Texture2D" path="res://assets/tiles/door_glass.png" id="5_nyymj"]
-[ext_resource type="Texture2D" path="res://assets/sprites/furniture/window_tempered.png" id="6_2y4ei"]
-[ext_resource type="Texture2D" path="res://assets/sprites/furniture/sofa_blue.png" id="7_gg70k"]
-[ext_resource type="Texture2D" path="res://assets/sprites/furniture/coffee_table.png" id="8_mhfdu"]
+[ext_resource type="Texture2D" uid="uid://5auux1oe1umw" path="res://assets/tiles/door_wood.png" id="4_mbgd1"]
+[ext_resource type="Texture2D" uid="uid://biv1vjw54y2ju" path="res://assets/tiles/door_glass.png" id="5_nyymj"]
+[ext_resource type="Texture2D" uid="uid://ubmm7w8p3s76" path="res://assets/sprites/furniture/window_tempered.png" id="6_2y4ei"]
+[ext_resource type="Texture2D" uid="uid://cxbs5pyxyvif2" path="res://assets/sprites/furniture/sofa_blue.png" id="7_gg70k"]
+[ext_resource type="Texture2D" uid="uid://co6tepud7c321" path="res://assets/sprites/furniture/dining_table.png" id="8_mhfdu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sofa"]
+size = Vector2(31, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_table"]
+size = Vector2(24, 58)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y07t3"]
 size = Vector2(352, 288)
@@ -243,11 +249,27 @@ position = Vector2(256, 480)
 texture = ExtResource("7_gg70k")
 centered = false
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa1" unique_id=238757242 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa1/Collision" unique_id=965465594]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Table1" type="Sprite2D" parent="Decor" unique_id=44619744]
 texture_filter = 1
-position = Vector2(296, 496)
+position = Vector2(296, 480)
 texture = ExtResource("8_mhfdu")
 centered = false
+
+[node name="Collision" type="StaticBody2D" parent="Decor/Table1" unique_id=672863579 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Table1/Collision" unique_id=344049278]
+position = Vector2(16, 33)
+shape = SubResource("RectangleShape2D_table")
 
 [node name="Sofa2" type="Sprite2D" parent="Decor" unique_id=1034336911]
 texture_filter = 1
@@ -256,17 +278,41 @@ texture = ExtResource("7_gg70k")
 centered = false
 flip_h = true
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa2" unique_id=1734984452 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa2/Collision" unique_id=1655791538]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Sofa3" type="Sprite2D" parent="Decor" unique_id=1592723015]
 texture_filter = 1
 position = Vector2(1616, 480)
 texture = ExtResource("7_gg70k")
 centered = false
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa3" unique_id=1084082599 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa3/Collision" unique_id=931392780]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Table2" type="Sprite2D" parent="Decor" unique_id=1131141380]
 texture_filter = 1
-position = Vector2(1656, 496)
+position = Vector2(1656, 480)
 texture = ExtResource("8_mhfdu")
 centered = false
+
+[node name="Collision" type="StaticBody2D" parent="Decor/Table2" unique_id=532700854 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Table2/Collision" unique_id=1226988490]
+position = Vector2(16, 33)
+shape = SubResource("RectangleShape2D_table")
 
 [node name="Sofa4" type="Sprite2D" parent="Decor" unique_id=1340365211]
 texture_filter = 1
@@ -275,17 +321,41 @@ texture = ExtResource("7_gg70k")
 centered = false
 flip_h = true
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa4" unique_id=100379086 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa4/Collision" unique_id=1579547062]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Sofa5" type="Sprite2D" parent="Decor" unique_id=232562903]
 texture_filter = 1
 position = Vector2(256, 576)
 texture = ExtResource("7_gg70k")
 centered = false
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa5" unique_id=1602062112 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa5/Collision" unique_id=608199961]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Table3" type="Sprite2D" parent="Decor" unique_id=1020578123]
 texture_filter = 1
-position = Vector2(296, 592)
+position = Vector2(296, 576)
 texture = ExtResource("8_mhfdu")
 centered = false
+
+[node name="Collision" type="StaticBody2D" parent="Decor/Table3" unique_id=1461590538 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Table3/Collision" unique_id=1633612752]
+position = Vector2(16, 33)
+shape = SubResource("RectangleShape2D_table")
 
 [node name="Sofa6" type="Sprite2D" parent="Decor" unique_id=2110407354]
 texture_filter = 1
@@ -294,17 +364,41 @@ texture = ExtResource("7_gg70k")
 centered = false
 flip_h = true
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa6" unique_id=489293882 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa6/Collision" unique_id=231681136]
+position = Vector2(16.5, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Sofa7" type="Sprite2D" parent="Decor" unique_id=11379992]
 texture_filter = 1
 position = Vector2(1616, 576)
 texture = ExtResource("7_gg70k")
 centered = false
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa7" unique_id=325047258 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa7/Collision" unique_id=1193481555]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Table4" type="Sprite2D" parent="Decor" unique_id=2106107261]
 texture_filter = 1
-position = Vector2(1656, 592)
+position = Vector2(1656, 576)
 texture = ExtResource("8_mhfdu")
 centered = false
+
+[node name="Collision" type="StaticBody2D" parent="Decor/Table4" unique_id=1004225148 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Table4/Collision" unique_id=474339355]
+position = Vector2(16, 33)
+shape = SubResource("RectangleShape2D_table")
 
 [node name="Sofa8" type="Sprite2D" parent="Decor" unique_id=475058528]
 texture_filter = 1
@@ -313,17 +407,41 @@ texture = ExtResource("7_gg70k")
 centered = false
 flip_h = true
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa8" unique_id=6094656 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa8/Collision" unique_id=38438377]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Sofa9" type="Sprite2D" parent="Decor" unique_id=1369070450]
 texture_filter = 1
 position = Vector2(256, 672)
 texture = ExtResource("7_gg70k")
 centered = false
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa9" unique_id=1857808332 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa9/Collision" unique_id=167469698]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Table5" type="Sprite2D" parent="Decor" unique_id=2087531936]
 texture_filter = 1
-position = Vector2(296, 688)
+position = Vector2(296, 672)
 texture = ExtResource("8_mhfdu")
 centered = false
+
+[node name="Collision" type="StaticBody2D" parent="Decor/Table5" unique_id=1789364269 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Table5/Collision" unique_id=667451833]
+position = Vector2(16, 33)
+shape = SubResource("RectangleShape2D_table")
 
 [node name="Sofa10" type="Sprite2D" parent="Decor" unique_id=757656346]
 texture_filter = 1
@@ -332,17 +450,41 @@ texture = ExtResource("7_gg70k")
 centered = false
 flip_h = true
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa10" unique_id=366803885 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa10/Collision" unique_id=1252158556]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Sofa11" type="Sprite2D" parent="Decor" unique_id=1893720844]
 texture_filter = 1
 position = Vector2(1616, 672)
 texture = ExtResource("7_gg70k")
 centered = false
 
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa11" unique_id=1136962851 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa11/Collision" unique_id=1811709217]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
+
 [node name="Table6" type="Sprite2D" parent="Decor" unique_id=985136389]
 texture_filter = 1
-position = Vector2(1656, 688)
+position = Vector2(1656, 672)
 texture = ExtResource("8_mhfdu")
 centered = false
+
+[node name="Collision" type="StaticBody2D" parent="Decor/Table6" unique_id=836769892 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Table6/Collision" unique_id=1223080991]
+position = Vector2(16, 33)
+shape = SubResource("RectangleShape2D_table")
 
 [node name="Sofa12" type="Sprite2D" parent="Decor" unique_id=908558258]
 texture_filter = 1
@@ -350,6 +492,14 @@ position = Vector2(1696, 672)
 texture = ExtResource("7_gg70k")
 centered = false
 flip_h = true
+
+[node name="Collision" type="StaticBody2D" parent="Decor/Sofa12" unique_id=1051655942 groups=["obstacles"]]
+collision_layer = 16
+collision_mask = 0
+
+[node name="Shape" type="CollisionShape2D" parent="Decor/Sofa12/Collision" unique_id=1731172001]
+position = Vector2(16, 32)
+shape = SubResource("RectangleShape2D_sofa")
 
 [node name="StairLaneBlockers" type="StaticBody2D" parent="." unique_id=1524179697]
 collision_layer = 16

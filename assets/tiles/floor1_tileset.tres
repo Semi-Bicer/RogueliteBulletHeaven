@@ -1,13 +1,13 @@
-[gd_resource type="TileSet" format=3]
+[gd_resource type="TileSet" format=3 uid="uid://djhhftnw82meq"]
 
-[ext_resource type="Texture2D" path="res://assets/tiles/marble_floor_a.png" id="1_qt842"]
-[ext_resource type="Texture2D" path="res://assets/tiles/marble_floor_b.png" id="2_i7r0k"]
-[ext_resource type="Texture2D" path="res://assets/tiles/carpet_blue.png" id="3_x11s2"]
-[ext_resource type="Texture2D" path="res://assets/tiles/wall_top_white.png" id="4_bfe8k"]
-[ext_resource type="Texture2D" path="res://assets/tiles/wall_bottom_beige.png" id="5_2jix4"]
-[ext_resource type="Texture2D" path="res://assets/tiles/outside_dark.png" id="6_7pnj4"]
-[ext_resource type="Texture2D" path="res://assets/tiles/void_room.png" id="7_h5oo3"]
-[ext_resource type="Texture2D" path="res://assets/tiles/wall_outline.png" id="8_7sp72"]
+[ext_resource type="Texture2D" uid="uid://drlg7mxrnnlcj" path="res://assets/tiles/marble_floor_a.png" id="1_qt842"]
+[ext_resource type="Texture2D" uid="uid://ei6douh10v4b" path="res://assets/tiles/marble_floor_b.png" id="2_i7r0k"]
+[ext_resource type="Texture2D" uid="uid://bmcnqg86cs83d" path="res://assets/tiles/carpet_blue.png" id="3_x11s2"]
+[ext_resource type="Texture2D" uid="uid://dc3ap4f5cfysl" path="res://assets/tiles/wall_top_white.png" id="4_bfe8k"]
+[ext_resource type="Texture2D" uid="uid://de7x8lhskkk7f" path="res://assets/tiles/wall_bottom_beige.png" id="5_2jix4"]
+[ext_resource type="Texture2D" uid="uid://ddgtlcbrk02n2" path="res://assets/tiles/outside_dark.png" id="6_7pnj4"]
+[ext_resource type="Texture2D" uid="uid://rskvajh1ujp7" path="res://assets/tiles/void_room.png" id="7_h5oo3"]
+[ext_resource type="Texture2D" uid="uid://dbd5bhgob2qug" path="res://assets/tiles/wall_outline.png" id="8_7sp72"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1tp5h"]
 texture = ExtResource("1_qt842")

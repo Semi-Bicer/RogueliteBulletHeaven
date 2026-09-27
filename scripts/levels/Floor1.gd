@@ -4,7 +4,8 @@ extends Node2D
 ## where the player starts, where enemies may spawn, and which way an enemy
 ## should walk to reach the player around walls.
 ##
-## Walkable = a cell on `Floor` with nothing on `Walls`. Enemy steering uses a
+## Walkable = a cell on `Floor` with nothing on `Walls` and no furniture body
+## (group `obstacles`) covering it. Enemy steering uses a
 ## flow field: a BFS from the player's cell over walkable cells, rebuilt only
 ## when the player moves to another cell. Enemies with no wall between them
 ## and the player ignore it and walk straight.
@@ -25,10 +26,36 @@ var _flow_origin := Vector2i(1 << 30, 0)
 
 func _ready() -> void:
 	add_to_group("level")
+	var blocked := _obstacle_cells()
 	for cell in floor_layer.get_used_cells():
-		if walls_layer.get_cell_source_id(cell) == -1:
+		if walls_layer.get_cell_source_id(cell) == -1 and not blocked.has(cell):
 			_walkable[cell] = true
 			_cells.append(cell)
+
+
+## Cells overlapped by a furniture collision rect. Each cell is shrunk by a few
+## pixels first, so a rect that merely touches a cell's edge does not close it.
+func _obstacle_cells() -> Dictionary:
+	const SHRINK := 4.0
+	var tile := Vector2(floor_layer.tile_set.tile_size)
+	var out := {}
+	for body in get_tree().get_nodes_in_group("obstacles"):
+		if not is_ancestor_of(body):
+			continue
+		for shape_node in body.get_children():
+			var rect_shape := (shape_node as CollisionShape2D).shape as RectangleShape2D
+			if rect_shape == null:
+				continue
+			var center := to_local(shape_node.global_position)
+			var rect := Rect2(center - rect_shape.size / 2.0, rect_shape.size)
+			var first := floor_layer.local_to_map(rect.position)
+			var last := floor_layer.local_to_map(rect.end)
+			for x in range(first.x, last.x + 1):
+				for y in range(first.y, last.y + 1):
+					var cell_rect := Rect2(Vector2(x, y) * tile, tile).grow(-SHRINK)
+					if cell_rect.intersects(rect):
+						out[Vector2i(x, y)] = true
+	return out
 
 
 func player_spawn() -> Vector2:
