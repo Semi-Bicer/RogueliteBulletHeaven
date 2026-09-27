@@ -12,6 +12,7 @@ const SPAWN_RADIUS_MIN := 620.0
 const SPAWN_RADIUS_MAX := 780.0
 const DESPAWN_RADIUS := 1600.0
 const MAX_ALIVE := 320
+const BATCH_SPREAD := 128.0  ## Max distance from a batch's anchor inside a level.
 
 const TYPES := {
 	"slime": {"health": 11.0, "speed": 52.0, "damage": 7.0, "xp": 1, "size": 13.0,
@@ -79,19 +80,29 @@ func _spawn_batch(phase: Dictionary) -> void:
 		return
 	var pool: Array = phase["pool"]
 	var count: int = mini(int(phase["batch"]), MAX_ALIVE - alive)
-	# Cluster the batch in one arc so swarms read as a wave, not a ring.
+	# Cluster the batch so swarms read as a wave, not a ring. Inside a level
+	# the wave gathers around one walkable anchor; in open space, one arc.
+	var level := get_tree().get_first_node_in_group("level")
+	var origin := _player.global_position
+	var anchor := Vector2.INF
+	if level != null:
+		anchor = level.random_spawn_point(origin, SPAWN_RADIUS_MIN, SPAWN_RADIUS_MAX)
 	var arc_center := randf_range(0.0, TAU)
 	for i in count:
-		var angle := arc_center + randf_range(-0.6, 0.6)
-		_spawn(pool[randi() % pool.size()], angle)
+		var pos: Vector2
+		if level != null:
+			pos = level.random_spawn_point(origin, SPAWN_RADIUS_MIN, SPAWN_RADIUS_MAX, anchor, BATCH_SPREAD)
+		else:
+			var angle := arc_center + randf_range(-0.6, 0.6)
+			pos = origin + Vector2.from_angle(angle) * randf_range(SPAWN_RADIUS_MIN, SPAWN_RADIUS_MAX)
+		_spawn(pool[randi() % pool.size()], pos)
 
 
-func _spawn(type_name: String, angle: float) -> void:
+func _spawn(type_name: String, pos: Vector2) -> void:
 	var data: Dictionary = TYPES[type_name]
 	var enemy := ENEMY.instantiate()
-	var radius := randf_range(SPAWN_RADIUS_MIN, SPAWN_RADIUS_MAX)
 	add_child(enemy)
-	enemy.global_position = _player.global_position + Vector2.from_angle(angle) * radius
+	enemy.global_position = pos
 	enemy.configure(data, GameState.difficulty())
 
 

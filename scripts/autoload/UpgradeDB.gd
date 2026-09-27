@@ -1,9 +1,8 @@
 extends Node
 ## Upgrade catalogue and the roll that builds a legal set of level-up choices.
 ##
-## Weapons only for now; passives are still to come. docs/DESIGN.md section 7
-## lists the rest of the catalogue, the entry shapes, and the rules `roll()`
-## has to respect. Orbital Shield is on hold (DESIGN.md §5).
+## docs/DESIGN.md section 7 lists the catalogue, the entry shapes, and the
+## rules `roll()` has to respect. Orbital Shield is on hold (DESIGN.md §5).
 
 const MAX_WEAPONS := 3
 
@@ -20,6 +19,37 @@ const UPGRADES: Array[Dictionary] = [
 	{"id": "shock_nova", "name": "Shock Nova", "desc": "Periodic shockwave around you.",
 		"kind": "weapon", "scene": "res://scenes/weapons/ShockNova.tscn", "max_level": 8,
 		"color": Color(0.7, 0.6, 1.0)},
+
+	{"id": "might", "name": "Might", "desc": "+12% damage for all weapons.",
+		"kind": "passive", "stat": "damage_mult", "amount": 0.12, "max_level": 6,
+		"color": Color(1.0, 0.4, 0.4)},
+	{"id": "haste", "name": "Haste", "desc": "+10% fire rate for all weapons.",
+		"kind": "passive", "stat": "fire_rate_mult", "amount": 0.10, "max_level": 6,
+		"color": Color(1.0, 0.85, 0.3)},
+	{"id": "swiftness", "name": "Swiftness", "desc": "+8% move speed.",
+		"kind": "passive", "stat": "move_speed_mult", "amount": 0.08, "max_level": 5,
+		"color": Color(0.5, 0.95, 1.0)},
+	{"id": "vitality", "name": "Vitality", "desc": "+20 max HP and heal the same.",
+		"kind": "passive", "stat": "max_health_bonus", "amount": 20.0, "max_level": 6,
+		"color": Color(0.95, 0.35, 0.55)},
+	{"id": "regeneration", "name": "Regeneration", "desc": "+0.6 HP per second.",
+		"kind": "passive", "stat": "health_regen", "amount": 0.6, "max_level": 5,
+		"color": Color(0.45, 0.9, 0.5)},
+	{"id": "armor", "name": "Armor", "desc": "-1 damage taken per hit.",
+		"kind": "passive", "stat": "armor", "amount": 1.0, "max_level": 5,
+		"color": Color(0.7, 0.72, 0.78)},
+	{"id": "area", "name": "Resonance", "desc": "+12% attack area.",
+		"kind": "passive", "stat": "area_mult", "amount": 0.12, "max_level": 5,
+		"color": Color(0.75, 0.5, 1.0)},
+	{"id": "multishot", "name": "Split Shot", "desc": "+1 projectile for projectile weapons.",
+		"kind": "passive", "stat": "extra_projectiles", "amount": 1.0, "max_level": 3,
+		"color": Color(0.4, 0.7, 1.0)},
+	{"id": "magnet", "name": "Magnet", "desc": "+30% pickup range.",
+		"kind": "passive", "stat": "pickup_range_mult", "amount": 0.30, "max_level": 4,
+		"color": Color(0.3, 0.9, 0.8)},
+	{"id": "greed", "name": "Greed", "desc": "+15% XP from gems.",
+		"kind": "passive", "stat": "xp_gain_mult", "amount": 0.15, "max_level": 4,
+		"color": Color(0.95, 0.75, 0.3)},
 ]
 
 ## Offered when fewer than `count` real choices remain (everything maxed).

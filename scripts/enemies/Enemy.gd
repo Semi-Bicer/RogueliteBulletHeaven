@@ -1,6 +1,7 @@
 class_name Enemy
 extends CharacterBody2D
-## Swarm unit. Walks straight at the player and damages on contact.
+## Swarm unit. Walks at the player (around walls, via the level's flow field)
+## and damages on contact.
 ## All variants share this script; stats and sprite come from EnemySpawner.TYPES.
 ## Sprites are drawn facing right and flipped toward the direction of travel.
 
@@ -18,6 +19,7 @@ var xp_value: int = 1
 var is_boss: bool = false
 
 var _player: Node2D = null
+var _level: Node = null  ## Optional; without one, enemies walk in a straight line.
 var _knockback: Vector2 = Vector2.ZERO
 var _dying: bool = false
 
@@ -25,6 +27,7 @@ var _dying: bool = false
 func _ready() -> void:
 	add_to_group("enemies")
 	_player = get_tree().get_first_node_in_group("player")
+	_level = get_tree().get_first_node_in_group("level")
 
 
 ## `data` is one entry of EnemySpawner.TYPES; `mult` is the time-based ramp.
@@ -50,8 +53,10 @@ func _physics_process(delta: float) -> void:
 		_player = get_tree().get_first_node_in_group("player")
 		return
 
-	var to_player := _player.global_position - global_position
-	var desired := to_player.normalized() * speed
+	var dir := global_position.direction_to(_player.global_position)
+	if _level != null:
+		dir = _level.flow_direction(global_position, _player.global_position)
+	var desired := dir * speed
 	_knockback = _knockback.move_toward(Vector2.ZERO, KNOCKBACK_DECAY * 60.0 * delta)
 	velocity = desired + _knockback
 	move_and_slide()

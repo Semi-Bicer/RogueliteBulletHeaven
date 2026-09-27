@@ -1,0 +1,81 @@
+[gd_resource type="TileSet" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tiles/marble_floor_a.png" id="1_qt842"]
+[ext_resource type="Texture2D" path="res://assets/tiles/marble_floor_b.png" id="2_i7r0k"]
+[ext_resource type="Texture2D" path="res://assets/tiles/carpet_blue.png" id="3_x11s2"]
+[ext_resource type="Texture2D" path="res://assets/tiles/wall_top_white.png" id="4_bfe8k"]
+[ext_resource type="Texture2D" path="res://assets/tiles/wall_bottom_beige.png" id="5_2jix4"]
+[ext_resource type="Texture2D" path="res://assets/tiles/outside_dark.png" id="6_7pnj4"]
+[ext_resource type="Texture2D" path="res://assets/tiles/void_room.png" id="7_h5oo3"]
+[ext_resource type="Texture2D" path="res://assets/tiles/wall_outline.png" id="8_7sp72"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1tp5h"]
+texture = ExtResource("1_qt842")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_he5do"]
+texture = ExtResource("2_i7r0k")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4ryh5"]
+texture = ExtResource("3_x11s2")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ccio6"]
+texture = ExtResource("4_bfe8k")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3iirh"]
+texture = ExtResource("5_2jix4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_014l0"]
+texture = ExtResource("6_7pnj4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ybtyc"]
+texture = ExtResource("7_h5oo3")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_61xvf"]
+texture = ExtResource("8_7sp72")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 32)
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_1tp5h")
+sources/1 = SubResource("TileSetAtlasSource_he5do")
+sources/2 = SubResource("TileSetAtlasSource_4ryh5")
+sources/3 = SubResource("TileSetAtlasSource_ccio6")
+sources/4 = SubResource("TileSetAtlasSource_3iirh")
+sources/5 = SubResource("TileSetAtlasSource_014l0")
+sources/6 = SubResource("TileSetAtlasSource_ybtyc")
+sources/7 = SubResource("TileSetAtlasSource_61xvf")

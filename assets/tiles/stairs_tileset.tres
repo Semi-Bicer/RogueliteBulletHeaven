@@ -1,0 +1,12 @@
+[gd_resource type="TileSet" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tiles/stair_step.png" id="1_ghxjr"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bb1ct"]
+texture = ExtResource("1_ghxjr")
+texture_region_size = Vector2i(32, 16)
+0:0/0 = 0
+
+[resource]
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetAtlasSource_bb1ct")

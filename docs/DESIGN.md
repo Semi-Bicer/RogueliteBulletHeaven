@@ -82,8 +82,11 @@ must be a pure consumer of these signals and must never be read back by gameplay
 | 2 | `enemy` | `Enemy` bodies (mask 2 as well, so they jostle each other) |
 | 3 | `player_attack` | projectiles, orbs, novas |
 | 4 | `pickup` | XP gems |
+| 5 | `world` | level walls, empty rooms, closed doors, decor-stair blockers (TileSet physics layer) |
 
-- The player body has **mask 0** — it walks through enemies. Contact damage is
+- The player body has **mask 16** (`world`) — it walks through enemies but not walls.
+  Enemies use mask 2 | 16 so they jostle each other and slide along walls.
+- Old note: the player body had **mask 0** — it walks through enemies. Contact damage is
   handled by a separate `HurtBox` `Area2D` (mask 2), polled on a 0.45 s tick.
 - Attacks are `Area2D` with mask 2 and detect enemies via `body_entered`.
 - `PickupArea` is an `Area2D` with mask 8 whose `CircleShape2D` is
@@ -290,7 +293,7 @@ gem and calls `attract_to(player)` on it. Then the gem homes in, accelerating at
 Gem tiers are cosmetic: 5 XP or more is purple and 1.25x, 25 XP or more is orange
 and 1.6x.
 
-### Upgrade catalogue **[TO BUILD]**
+### Upgrade catalogue **[IN REPO, minus Orbital Shield]**
 
 `UpgradeDB.UPGRADES` — a flat array of dictionaries. Two kinds:
 
@@ -374,6 +377,50 @@ One screen for both outcomes, differing in title and colour, showing time, level
 and kills, with a restart button.
 
 ---
+
+## 8b. Level — Floor 1 (T-shaped building) **[IN PROGRESS]**
+
+The play space is the ground floor of a T-shaped building on a 32 px tile grid.
+Design sketch scale: **2 sketch px = one 32 px tile** (1 px = 16 px). The plan is
+mirror-symmetric about the stem's centre line.
+
+- **Stem (bottom of the T)** — 10 tiles wide. The player spawns just inside the
+  **entrance** (automatic glass door at the bottom) and walks north over **two
+  flights of stairs**, each 3 risers with 32 px marble treads between them.
+  A riser is a 16 px strip: `stair_step.png` (32x16, darkened `marble_floor_a`).
+- **Bar (top of the T)** — 62 x 23 walkable tiles. Its north wall is 2 rows
+  (white plaster over beige wainscot) carrying 12 wooden doors
+  (`door_wood.png`, 32x64). The south wall either side of the stem carries 6+6
+  tempered windows (64x32).
+- **Top centre corridor** — 6 tiles wide, ending in an automatic glass door.
+- **Automatic glass doors** — 4 `door_glass.png` panels (32x64) side by side,
+  at the entrance and at the top corridor. Closed (solid) for now.
+- **Top corner stairs** — two lanes on each side leading to the upper floor.
+  **Decor only** for now: visible but not walkable.
+- **Work areas** — 5x10 tile blue carpet zones, each holding three
+  sofa | coffee table | sofa sets with gaps between them.
+- **Empty rooms [LATER]** — the two dark 12x10 rectangles beside the work areas
+  are **intentionally empty for now**. Rooms may be added there later; until
+  then they are solid, unwalkable space.
+
+**Implementation** — `scenes/levels/Floor1.tscn`, painted in the editor:
+
+| Node | Content |
+| --- | --- |
+| `Floor` | walkable marble and carpet (`floor1_tileset.tres`) |
+| `StairLanes` | marble under the decor corner stairs (not walkable) |
+| `Stairs` | 32x16 risers (`stairs_tileset.tres`, tile size 32x16) |
+| `Walls` | walls, empty rooms, dark cells behind glass doors — physics layer `world` |
+| `WallOutline` | 2 px dark contour on wall edges (16-tile atlas, one per edge mask) |
+| `Decor` | Sprite2D doors, windows, sofas, tables (sit on 16 px positions) |
+| `StairLaneBlockers` | StaticBody2D keeping the player off the decor stairs |
+| `PlayerSpawn` | Marker2D at the entrance |
+
+`Floor1.gd` (group `level`) answers gameplay: `player_spawn()`,
+`random_spawn_point()` (the spawner picks walkable cells 620–780 px away,
+clustered per batch) and `flow_direction()` — enemies walk straight at the
+player unless a wall is in the way, then follow a BFS flow field that is
+rebuilt only when the player changes cell.
 
 ## 9. Balance notes
 
