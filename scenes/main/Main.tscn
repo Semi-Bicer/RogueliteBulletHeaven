@@ -4,9 +4,9 @@
 [ext_resource type="Script" uid="uid://4x5sn63e3wvn" path="res://scripts/main/Background.gd" id="2_bg"]
 [ext_resource type="Script" uid="uid://bsct2a3i6egrq" path="res://scripts/systems/EnemySpawner.gd" id="3_spawner"]
 [ext_resource type="PackedScene" uid="uid://dyovpdreyxo0u" path="res://scenes/player/Player.tscn" id="4_player"]
-[ext_resource type="PackedScene" uid="uid://sa7t5basj4t4" path="res://PauseMenu.tscn" id="5_dc040"]
+[ext_resource type="PackedScene" uid="uid://c1lvdi087nvy1" path="res://scenes/ui/PauseMenu.tscn" id="5_dc040"]
 [ext_resource type="PackedScene" uid="uid://bymijpxo45a7u" path="res://scenes/ui/GameOverMenu.tscn" id="6_1rhdn"]
-[ext_resource type="PackedScene" uid="uid://bpvsh8joqrnrx" path="res://xp_bar.tscn" id="7_sjxhf"]
+[ext_resource type="PackedScene" uid="uid://bpvsh8joqrnrx" path="res://scenes/ui/xp_bar.tscn" id="7_sjxhf"]
 [ext_resource type="PackedScene" uid="uid://bhj7kyf3m13de" path="res://scenes/ui/UpgradeMenu.tscn" id="8_ko0rf"]
 
 [node name="Main" type="Node2D" unique_id=605574312]

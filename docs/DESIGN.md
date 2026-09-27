@@ -290,7 +290,7 @@ gem and calls `attract_to(player)` on it. Then the gem homes in, accelerating at
 Gem tiers are cosmetic: 5 XP or more is purple and 1.25x, 25 XP or more is orange
 and 1.6x.
 
-### Upgrade catalogue **[TO BUILD]**
+### Upgrade catalogue **[IN REPO, minus Orbital Shield]**
 
 `UpgradeDB.UPGRADES` — a flat array of dictionaries. Two kinds:
 
