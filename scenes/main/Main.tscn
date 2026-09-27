@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dgxk0xl6ors63"]
 
 [ext_resource type="Script" uid="uid://c5cy8nna412wf" path="res://scripts/main/Main.gd" id="1_main"]
-[ext_resource type="Script" uid="uid://4x5sn63e3wvn" path="res://scripts/main/Background.gd" id="2_bg"]
+[ext_resource type="PackedScene" path="res://scenes/levels/Floor1.tscn" id="2_floor1"]
 [ext_resource type="Script" uid="uid://bsct2a3i6egrq" path="res://scripts/systems/EnemySpawner.gd" id="3_spawner"]
 [ext_resource type="PackedScene" uid="uid://dyovpdreyxo0u" path="res://scenes/player/Player.tscn" id="4_player"]
 [ext_resource type="PackedScene" uid="uid://c1lvdi087nvy1" path="res://scenes/ui/PauseMenu.tscn" id="5_dc040"]
@@ -12,9 +12,7 @@
 [node name="Main" type="Node2D" unique_id=605574312]
 script = ExtResource("1_main")
 
-[node name="Background" type="Node2D" parent="." unique_id=158764529]
-z_index = -100
-script = ExtResource("2_bg")
+[node name="Floor1" parent="." unique_id=158764529 instance=ExtResource("2_floor1")]
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=759415293]
 script = ExtResource("3_spawner")

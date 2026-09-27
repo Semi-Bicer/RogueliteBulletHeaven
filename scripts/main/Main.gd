@@ -14,6 +14,9 @@ const GEM := preload("res://scenes/pickups/XPGem.tscn")
 func _ready() -> void:
 	randomize()
 	EventBus.enemy_died.connect(_on_enemy_died)
+	var level := get_tree().get_first_node_in_group("level")
+	if level != null:
+		player.global_position = level.player_spawn()
 	GameState.start_run()
 
 
