@@ -40,9 +40,13 @@ theme_override_constants/separation = 10
 layout_mode = 2
 text = "OYUN BİTTİ"
 
-[node name="ScoreLabel" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=1325566041]
+[node name="KillsLabel" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=627910226]
 layout_mode = 2
 text = "Öldürülen: 0"
+
+[node name="ScoreLabel" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=1325566041]
+layout_mode = 2
+text = "Skor: 0"
 
 [node name="TimeLabel" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=1604223069]
 layout_mode = 2

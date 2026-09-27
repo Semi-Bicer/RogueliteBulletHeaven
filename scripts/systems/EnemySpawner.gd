@@ -47,7 +47,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	if not GameState.running:
+	if not GameState.running or GameState.white_hand_active:
 		return
 	if _player == null or not is_instance_valid(_player):
 		_player = get_tree().get_first_node_in_group("player")

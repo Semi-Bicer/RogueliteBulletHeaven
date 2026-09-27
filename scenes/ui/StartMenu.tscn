@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cviif43na0brq"]
 
 [ext_resource type="Script" uid="uid://baxejnt8asx5i" path="res://scenes/ui/StartMenu.gd" id="1_hbvfd"]
+[ext_resource type="PackedScene" path="res://scenes/ui/SoundSettings.tscn" id="2_sound"]
 
 [node name="StartMenu" type="CanvasLayer" unique_id=1273025776]
 script = ExtResource("1_hbvfd")
@@ -20,7 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.40610638, 0, 0.1497773, 1)
+color = Color(0.2080622, 0.1359322, 0.4537251, 1)
 
 [node name="CenterContainer" type="CenterContainer" parent="Control" unique_id=2001572753]
 layout_mode = 1
@@ -36,11 +37,11 @@ theme_override_constants/separation = 10
 
 [node name="TitleLabel" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=715889705]
 layout_mode = 2
-text = "GAMEJAMOYUNU"
+text = "Mühendis Tavuk"
 
 [node name="SubtitleLabel" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=2029074189]
 layout_mode = 2
-text = "GAMEJAMOYUNUMUZAHOSGELDINIZ"
+text = "Mühendislik Fakültesi A Bloktaki Canavarlardan Kaç"
 
 [node name="Spacer" type="Control" parent="Control/CenterContainer/VBoxContainer" unique_id=839857479]
 layout_mode = 2
@@ -49,6 +50,13 @@ layout_mode = 2
 layout_mode = 2
 text = "OYNA"
 
+[node name="SoundButton" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "SES AYARLARI"
+
 [node name="QuitButton" type="Button" parent="Control/CenterContainer/VBoxContainer" unique_id=1467131116]
 layout_mode = 2
 text = "ÇIK"
+
+[node name="SoundSettings" parent="Control" instance=ExtResource("2_sound")]
+layout_mode = 1

@@ -2,9 +2,13 @@
 
 [ext_resource type="Script" uid="uid://car358mbmqjmo" path="res://scenes/ui/HealthBart.gd" id="1_5fhnc"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppw0c"]
+bg_color = Color(0.82191056, 2.623126e-06, 7.70092e-07, 1)
+
 [node name="HealthBar" type="ProgressBar" unique_id=1356644832]
 custom_maximum_size = Vector2(32, 5)
 offset_right = 4.0
 offset_bottom = 27.0
+theme_override_styles/background = SubResource("StyleBoxFlat_ppw0c")
 show_percentage = false
 script = ExtResource("1_5fhnc")
