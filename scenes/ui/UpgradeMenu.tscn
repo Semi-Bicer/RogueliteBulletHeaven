@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bhj7kyf3m13de"]
 
-[ext_resource type="Script" uid="uid://cuaeqwy03qne1" path="res://UpgradeMenu.gd" id="1_ppw0c"]
+[ext_resource type="Script" uid="uid://cuaeqwy03qne1" path="res://scenes/ui/UpgradeMenu.gd" id="1_ppw0c"]
 
 [node name="UpgradeMenu" type="CanvasLayer" unique_id=135089525]
 process_mode = 3
