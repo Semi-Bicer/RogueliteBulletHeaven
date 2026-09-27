@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://kqst0ufvteyf"]
+
+[ext_resource type="Script" uid="uid://3r8c6ycy37ph" path="res://scenes/ui/DamageNumber.gd" id="1_a6ngf"]
+
+[node name="DamageNumber" type="Node2D" unique_id=438016255]
+script = ExtResource("1_a6ngf")
+
+[node name="Label" type="Label" parent="." unique_id=1579102401]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 12
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -112,13 +112,27 @@ func heal(amount: float, flash: bool = true) -> void:
 	EventBus.player_health_changed.emit(health, stats.max_health())
 
 
-func _die() -> void:
+func _die(victory: bool = false) -> void:
 	alive = false
 	velocity = Vector2.ZERO
 	body_visual.stop()
 	body_visual.modulate = Color(0.45, 0.45, 0.5)
 	EventBus.player_died.emit()
-	GameState.end_run(false)
+	GameState.end_run(victory)
+
+
+## Stops the player without ending the run, so a cutscene can play the death.
+func freeze() -> void:
+	alive = false
+	velocity = Vector2.ZERO
+	body_visual.stop()
+
+
+## White Hand kill: ignores health and armor. Surviving until it arrives is the win.
+func insta_kill() -> void:
+	health = 0.0
+	EventBus.player_health_changed.emit(0.0, stats.max_health())
+	_die(true)
 
 
 func _flash(color: Color) -> void:

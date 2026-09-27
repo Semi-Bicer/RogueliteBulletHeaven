@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c1lvdi087nvy1"]
 
 [ext_resource type="Script" uid="uid://6boksarvxb4w" path="res://scenes/ui/PauseMenu.gd" id="1_nov15"]
+[ext_resource type="PackedScene" path="res://scenes/ui/SoundSettings.tscn" id="2_sound"]
 
 [node name="PauseMenu" type="CanvasLayer" unique_id=1394130646]
 process_mode = 3
@@ -52,7 +53,15 @@ process_mode = 3
 layout_mode = 2
 text = "YENİDEN BAŞLAT"
 
+[node name="SoundButton" type="Button" parent="Control/CenterContainer/VBoxContainer"]
+process_mode = 3
+layout_mode = 2
+text = "SES AYARLARI"
+
 [node name="QuitButton" type="Button" parent="Control/CenterContainer/VBoxContainer" unique_id=235571151]
 process_mode = 3
 layout_mode = 2
 text = "ANA MENU"
+
+[node name="SoundSettings" parent="Control" instance=ExtResource("2_sound")]
+layout_mode = 1

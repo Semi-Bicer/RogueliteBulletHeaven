@@ -1,5 +1,8 @@
 class_name Enemy
 extends CharacterBody2D
+
+const DAMAGE_NUMBER_SCENE := preload("res://scenes/ui/DamageNumber.tscn")
+
 ## Swarm unit. Walks at the player (around walls, via the level's flow field)
 ## and damages on contact.
 ## All variants share this script; stats and sprite come from EnemySpawner.TYPES.
@@ -28,6 +31,13 @@ func _ready() -> void:
 	add_to_group("enemies")
 	_player = get_tree().get_first_node_in_group("player")
 	_level = get_tree().get_first_node_in_group("level")
+	EventBus.white_hand_started.connect(_on_white_hand_started)
+
+
+## The 5-minute White Hand wipes the floor so only the reaper is left.
+func _on_white_hand_started() -> void:
+	if not _dying:
+		_die()
 
 
 ## `data` is one entry of EnemySpawner.TYPES; `mult` is the time-based ramp.
@@ -73,6 +83,18 @@ func take_damage(amount: float) -> void:
 		return
 	health -= amount
 	EventBus.damage_dealt.emit(global_position, amount, false)
+	
+	# --- HASAR YAZISINI ÇIKART ---
+	var dmg_popup = DAMAGE_NUMBER_SCENE.instantiate()
+	dmg_popup.global_position = global_position + Vector2(0, -14)
+	var parent_node := get_parent()
+	if parent_node != null:
+		parent_node.add_child(dmg_popup)
+	else:
+		get_tree().current_scene.add_child(dmg_popup)
+	dmg_popup.setup(amount)
+	# -----------------------------
+
 	if _player != null:
 		_knockback = (global_position - _player.global_position).normalized() * (60.0 if not is_boss else 12.0)
 	_flash()

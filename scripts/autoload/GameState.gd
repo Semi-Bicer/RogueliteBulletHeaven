@@ -1,7 +1,9 @@
 extends Node
-## Owns the state of a single run: timer, level/XP curve, kill count.
+## Owns the state of a single run: timer, level/XP curve, kill count, damage and dynamic score.
 
 const RUN_DURATION := 900.0  ## 15 minutes = victory.
+const WHITE_HAND_TIME := 300.0  ## 5 minutes: the clock stops and the end-boss comes.
+const SCORE_MULTIPLIERS: Array[float] = [1.2, 1.3, 1.4, 1.5]
 
 var run_time: float = 0.0
 var kills: int = 0
@@ -10,11 +12,27 @@ var xp: int = 0
 var xp_to_next: int = 5
 var running: bool = false
 var victory: bool = false
+var white_hand_active: bool = false  ## Clock frozen, no spawns, no XP; the end cutscene owns the run.
+
+# Toplam hasar ve rastgele çarpanlı skor
+var total_damage: float = 0.0
+var score: int = 0
+
+
+func _ready() -> void:
+	EventBus.damage_dealt.connect(_on_damage_dealt)
+
 
 func _process(delta: float) -> void:
-	if not running:
+	if not running or white_hand_active:
 		return
 	run_time += delta
+	if run_time >= WHITE_HAND_TIME:
+		run_time = WHITE_HAND_TIME
+		white_hand_active = true
+		EventBus.run_time_changed.emit(run_time)
+		EventBus.white_hand_started.emit()
+		return
 	EventBus.run_time_changed.emit(run_time)
 	if run_time >= RUN_DURATION:
 		end_run(true)
@@ -28,10 +46,14 @@ func start_run() -> void:
 	xp_to_next = xp_for_level(1)
 	running = true
 	victory = false
+	white_hand_active = false
+	total_damage = 0.0
+	score = 0
 	EventBus.run_started.emit()
 	EventBus.kills_changed.emit(kills)
 	EventBus.player_xp_changed.emit(xp, xp_to_next, level)
 	EventBus.run_time_changed.emit(run_time)
+	EventBus.score_changed.emit(total_damage, score)
 
 
 func end_run(won: bool) -> void:
@@ -48,7 +70,7 @@ func xp_for_level(lv: int) -> int:
 
 
 func add_xp(amount: int) -> void:
-	if not running:
+	if not running or white_hand_active:
 		return
 	xp += amount
 	while xp >= xp_to_next:
@@ -62,6 +84,15 @@ func add_xp(amount: int) -> void:
 func add_kill() -> void:
 	kills += 1
 	EventBus.kills_changed.emit(kills)
+
+
+func _on_damage_dealt(_pos: Vector2, amount: float, _is_crit: bool) -> void:
+	if not running:
+		return
+	total_damage += amount
+	var random_mult: float = SCORE_MULTIPLIERS.pick_random()
+	score += int(round(amount * random_mult))
+	EventBus.score_changed.emit(total_damage, score)
 
 
 ## Difficulty ramp shared by the spawner and enemy stat scaling.
