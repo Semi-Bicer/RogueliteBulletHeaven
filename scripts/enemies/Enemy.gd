@@ -1,5 +1,8 @@
 class_name Enemy
 extends CharacterBody2D
+
+const DAMAGE_NUMBER_SCENE := preload("res://scenes/ui/DamageNumber.tscn")
+
 ## Swarm unit. Walks at the player (around walls, via the level's flow field)
 ## and damages on contact.
 ## All variants share this script; stats and sprite come from EnemySpawner.TYPES.
@@ -73,6 +76,18 @@ func take_damage(amount: float) -> void:
 		return
 	health -= amount
 	EventBus.damage_dealt.emit(global_position, amount, false)
+	
+	# --- HASAR YAZISINI ÇIKART ---
+	var dmg_popup = DAMAGE_NUMBER_SCENE.instantiate()
+	dmg_popup.global_position = global_position + Vector2(0, -14)
+	var parent_node := get_parent()
+	if parent_node != null:
+		parent_node.add_child(dmg_popup)
+	else:
+		get_tree().current_scene.add_child(dmg_popup)
+	dmg_popup.setup(amount)
+	# -----------------------------
+
 	if _player != null:
 		_knockback = (global_position - _player.global_position).normalized() * (60.0 if not is_boss else 12.0)
 	_flash()

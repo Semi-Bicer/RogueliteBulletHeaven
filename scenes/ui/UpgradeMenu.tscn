@@ -40,7 +40,7 @@ theme_override_constants/separation = 14
 
 [node name="Title" type="Label" parent="Control/CenterContainer/VBoxContainer" unique_id=1785574204]
 layout_mode = 2
-text = "BİR YÜKSELTMESİ SEÇ"
+text = "BİR YÜKSELTME SEÇ"
 horizontal_alignment = 1
 vertical_alignment = 1
 
