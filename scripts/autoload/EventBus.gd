@@ -11,7 +11,9 @@ signal player_died
 # --- Combat ---
 signal enemy_died(world_position: Vector2, xp_value: int)
 signal damage_dealt(world_position: Vector2, amount: float, is_crit: bool)
+signal total_damage_changed(total_damage: float)
 signal kills_changed(kills: int)
+signal score_changed(total_damage: float, score: int)
 
 # --- Run flow ---
 signal run_time_changed(seconds: float)

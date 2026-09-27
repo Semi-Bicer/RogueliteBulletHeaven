@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var title_label: Label = $Control/CenterContainer/VBoxContainer/TitleLabel
+@onready var kills_label: Label = $Control/CenterContainer/VBoxContainer/KillsLabel
 @onready var score_label: Label = $Control/CenterContainer/VBoxContainer/ScoreLabel
 @onready var time_label: Label = $Control/CenterContainer/VBoxContainer/TimeLabel
 @onready var restart_button: Button = $Control/CenterContainer/VBoxContainer/RestartButton
@@ -43,11 +44,14 @@ func show_game_over(header_text: String, header_color: Color = Color.WHITE) -> v
 	title_label.text = header_text
 	title_label.modulate = header_color
 
-	# Süreyi 02:45 gibi formatla
+	# Süre formatı (02:45 gibi)
 	var mins: int = int(elapsed_seconds) / 60
 	var secs: int = int(elapsed_seconds) % 60
 	time_label.text = "Süre: %02d:%02d" % [mins, secs]
-	score_label.text = "Öldürülen: %d" % total_kills
+	
+	# Öldürme ve skor değerlerini ayrı label'lara aktar
+	kills_label.text = "Öldürülen Düşman: %d" % total_kills
+	score_label.text = "Skor: %d (Hasar: %d)" % [GameState.score, int(GameState.total_damage)]
 
 	show()
 	get_tree().paused = true
