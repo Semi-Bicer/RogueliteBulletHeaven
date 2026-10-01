@@ -5,6 +5,11 @@ extends WeaponBase
 const PROJECTILE := preload("res://scenes/weapons/Projectile.tscn")
 const SPEED := 430.0
 const SPREAD := 0.35  ## Radians of jitter for bolts that share a target.
+const SFX := [
+	preload("res://assets/audio/sfx/sfx_wpn_laser3.wav"),
+	preload("res://assets/audio/sfx/sfx_wpn_laser4.wav"),
+	preload("res://assets/audio/sfx/sfx_wpn_laser5.wav"),
+]
 
 var damage: float = 10.0
 var bolts: int = 1
@@ -25,6 +30,7 @@ func _fire() -> void:
 	var count := bolts + int(player.stats.extra_projectiles)
 	var targets := nearest_enemies(count)
 	var origin: Vector2 = player.global_position
+	play_sfx(SFX, -12.0)  # Fires often; keep it under the music.
 	for i in count:
 		var dir: Vector2
 		if targets.is_empty():
