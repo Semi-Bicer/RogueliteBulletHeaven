@@ -9,6 +9,7 @@ var player = null
 
 var base_cooldown: float = 1.0
 var _cooldown_left: float = 0.15
+var _sfx: AudioStreamPlayer = null
 
 
 func setup(p) -> void:
@@ -45,6 +46,27 @@ func damage_of(base: float) -> float:
 
 func area_of(base: float) -> float:
 	return base * player.stats.area_mult
+
+
+## Plays one of `streams` on the SFX bus with a little pitch jitter so rapid
+## fire doesn't sound like a machine. `polyphony` caps overlapping copies.
+## The player is built on first use; a weapon always passes the same streams.
+func play_sfx(streams: Array, volume_db: float = 0.0, polyphony: int = 3, pitch_jitter: float = 0.08) -> void:
+	if streams.is_empty():
+		return
+	if _sfx == null:
+		# A randomizer (not swapping `stream`) so overlapping shots don't cut each other off.
+		var pool := AudioStreamRandomizer.new()
+		for st in streams:
+			pool.add_stream(-1, st)
+		pool.random_pitch = 1.0 + pitch_jitter
+		_sfx = AudioStreamPlayer.new()
+		_sfx.stream = pool
+		_sfx.bus = &"SFX"
+		_sfx.volume_db = volume_db
+		_sfx.max_polyphony = polyphony
+		add_child(_sfx)
+	_sfx.play()
 
 
 ## Enemies sorted by distance to the player, closest first.

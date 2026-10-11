@@ -5,6 +5,10 @@ extends WeaponBase
 const PROJECTILE := preload("res://scenes/weapons/FireBallProjectile.tscn")
 const SPEED := 360.0
 const SPREAD := 0.25  ## Radians between extra fireballs from Split Shot.
+const SFX := [
+	preload("res://assets/audio/sfx/Fire Spell Impact 4.wav"),
+	preload("res://assets/audio/sfx/Fire Spell Impact 5.wav"),
+]
 
 var damage: float = 18.0
 var hits: int = 2
@@ -25,6 +29,7 @@ func _fire() -> void:
 	var aim: Vector2 = player.facing if targets.is_empty() \
 		else origin.direction_to(targets[0].global_position)
 	var count := 1 + int(player.stats.extra_projectiles)
+	play_sfx(SFX, -8.0, 2)
 	for i in count:
 		# Fan extra shots evenly around the aim line: 0, +s, -s, +2s, ...
 		var offset := SPREAD * ceilf(i / 2.0) * (1.0 if i % 2 == 1 else -1.0)
